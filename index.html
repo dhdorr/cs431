@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!DOCTYPE html>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 4px 0;
+            display: inline-block;
+            border: 2px solid #4c7aaf;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn,
+        input[type=submit] {
+            width: 100%;
+            background-color: #4c7aaf;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        [type=file]:hover,
+        [type=submit]:hover {
+            background-color: #4c70af;
+        }
+
+        .upload-btn-wrapper {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <h2>Add Photo to Gallery</h2>
+            </div>
+        </div>
+        <br>
+
+        <form action="/action_page.php" method="post">
+
+            <div class="row">
+                <div class="col-3">
+                    <h2>Photo name:</h2>
+                </div>
+                <div class="col-3">
+                    <input type="text" name="pname">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <h2>Date taken:</h2>
+                </div>
+                <div class="col-3">
+                    <input type="text" name="date">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h2>Photographer:</h2>
+                </div>
+                <div class="col-3">
+                    <input type="text" name="photoer">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h2>Location:</h2>
+                </div>
+                <div class="col-3">
+                    <input type="text" name="location">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 offset-3">
+                    <div class="upload-btn-wrapper">
+                        <button class="btn">Select file</button>
+                        <input type="file" name="uploadfile">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 offset-3">
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
