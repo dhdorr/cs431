@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,22 +12,15 @@
   <body>
 
     <?php
-    $dir = "uploads/";
-    $file = $dir . basename($_FILES["uploadfile"]["name"]);
-    echo $file;
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["uploadfile"]["name"]);
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($file,PATHINFO_EXTENSION));
-#check if file exists already
-    if (file_exists($file)) {
-      echo "Sorry, file already exists.";
-      $uploadOk = 0;
-    }
-#checks if the upload is ok
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     if ($uploadOk == 0){
       echo "File failed to upload";
     }
     else{
-      if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $file)){
+      if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $target_file)){
         echo "Good.";
       }
       else{
@@ -79,29 +73,8 @@
       $pic->set_date($_POST["date"]);
       $pic->set_location($_POST["location"]);
       $pic->set_photographer($_POST["photoer"]);
-      #$pic->set_photo_file($a[3]);
-
-      #echo $pic->get_photo_file();
-
-#If good, assign photo to class variable
-      $array = array();
-      if($uploadOk == 1){
-        $pic->set_photo_file($file);
-      }
-
-      #$i = 0;
-      #if($handle = opendir($dir)){
-        #while(($file = readdir($handle)) !== false){
-          #if(!in_array($file,array('.','..')) && !is_dir($dir.$file))
-          #$i++;
-          #only if pic not already in directory,
-          #if (!file_exists($file)) {
-            #$pic->set_photo_file($file);
-          #}
-          #append text file with new photo class
-        #}
-      #}
-      #echo "$i files...";
+      $pic->set_photo_file($a[2]);
+      echo $pic->get_photo_file();
 
     ?>
 
@@ -150,7 +123,7 @@
     <div class="row">
       <div class="col-4">
         <div class="card">
-          <img src=<?php echo $pic->get_photo_file(); ?> class="card-img-top" alt="...">
+          <img src="uploads/testPic2.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title"><?php echo $pic->get_name();?></h5>
             <p class="card-text"><?php echo $pic->get_date();?><br><?php echo $pic->get_location();?><br><?php echo $pic->get_photographer();?></p>
