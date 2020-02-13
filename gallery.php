@@ -89,6 +89,13 @@
         $pic->set_photo_file($file);
       }
 
+#write to text file
+      $my_file = 'uploads/pic_list.txt';
+      #$my_file = fopen("uploads/pic_list.txt","w") or die("unable to open file!";
+      $txt = $pic->get_photo_file() . "\n" . $pic->get_name() . "\n" . $pic->get_date() . "\n" . $pic->get_location() . "\n" . $pic->get_photographer() . "\n";
+      file_put_contents($my_file, $txt, FILE_APPEND);
+      #fwrite($my_file, $txt);
+
       #$i = 0;
       #if($handle = opendir($dir)){
         #while(($file = readdir($handle)) !== false){
