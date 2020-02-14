@@ -11,6 +11,7 @@
   <body>
 
     <?php
+#Form handling & checks if image is ok to upload
     $dir = "uploads/";
     $file = $dir . basename($_FILES["uploadfile"]["name"]);
     echo $file;
@@ -33,7 +34,7 @@
         echo "Bad";
       }
     }
-
+#Photo class so each photo's info can be saved to an array
       class Photo {
         public $name;
         public $date;
@@ -72,44 +73,50 @@
           return $this->photo_file;
         }
       }
-      $a = scandir("uploads/");
-
+#Stores most recent photo upload as a Photo class
       $pic = new Photo();
       $pic->set_name($_POST["pname"]);
       $pic->set_date($_POST["date"]);
       $pic->set_location($_POST["location"]);
       $pic->set_photographer($_POST["photoer"]);
-      #$pic->set_photo_file($a[3]);
-
-      #echo $pic->get_photo_file();
 
 #If good, assign photo to class variable
-      $array = array();
       if($uploadOk == 1){
         $pic->set_photo_file($file);
       }
 
 #write to text file
       $my_file = 'uploads/pic_list.txt';
-      #$my_file = fopen("uploads/pic_list.txt","w") or die("unable to open file!";
       $txt = $pic->get_photo_file() . "\n" . $pic->get_name() . "\n" . $pic->get_date() . "\n" . $pic->get_location() . "\n" . $pic->get_photographer() . "\n";
       file_put_contents($my_file, $txt, FILE_APPEND);
-      #fwrite($my_file, $txt);
 
-      #$i = 0;
-      #if($handle = opendir($dir)){
-        #while(($file = readdir($handle)) !== false){
-          #if(!in_array($file,array('.','..')) && !is_dir($dir.$file))
-          #$i++;
-          #only if pic not already in directory,
-          #if (!file_exists($file)) {
-            #$pic->set_photo_file($file);
-          #}
-          #append text file with new photo class
-        #}
-      #}
-      #echo "$i files...";
+#Check the pic_list.txt for previous uploads and append them to array of Photos
+      $pic_array = array();
+      $read_file = fopen("uploads/pic_list.txt", "r") or die("Whoops!");
+      while(!feof($read_file)) {
+        $pic = new Photo();
+        for($x=0; $x<5; $x++){
+          if($x==0){
+            $pic->set_photo_file(fgets($read_file));
+          }
+          if($x==1){
+            $pic->set_name(fgets($read_file));
+          }
+          if($x==2){
+            $pic->set_date(fgets($read_file));
+          }
+          if($x==3){
+            $pic->set_location(fgets($read_file));
+          }
+          if($x==4){
+            $pic->set_photographer(fgets($read_file));
+          }
+        }
+        array_push($pic_array, $pic);
+      }
+      fclose($read_file);
 
+#Html display is currently hard coded, not sure how to use php to loop the display method
     ?>
 
   <br><br>
@@ -157,28 +164,28 @@
     <div class="row">
       <div class="col-4">
         <div class="card">
-          <img src=<?php echo $pic->get_photo_file(); ?> class="card-img-top" alt="...">
+          <img src=<?php echo $pic_array[0]->get_photo_file(); ?> class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title"><?php echo $pic->get_name();?></h5>
-            <p class="card-text"><?php echo $pic->get_date();?><br><?php echo $pic->get_location();?><br><?php echo $pic->get_photographer();?></p>
+            <h5 class="card-title"><?php echo $pic_array[0]->get_name();?></h5>
+            <p class="card-text"><?php echo $pic_array[0]->get_date();?><br><?php echo $pic_array[0]->get_location();?><br><?php echo $pic_array[0]->get_photographer();?></p>
           </div>
         </div>
       </div>
       <div class="col-4">
         <div class="card">
-          <img src="testPic4.png" class="card-img-top" alt="...">
+          <img src=<?php echo $pic_array[1]->get_photo_file(); ?> class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">Date Taken<br>Location<br>Photographer</p>
+            <h5 class="card-title"><?php echo $pic_array[1]->get_name();?></h5>
+            <p class="card-text"><?php echo $pic_array[1]->get_date();?><br><?php echo $pic_array[1]->get_location();?><br><?php echo $pic_array[1]->get_photographer();?></p>
           </div>
         </div>
       </div>
       <div class="col-4">
         <div class="card">
-          <img src="testPic.png" class="card-img-top" alt="...">
+          <img src=<?php echo $pic_array[2]->get_photo_file(); ?> class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">Date Taken<br>Location<br>Photographer</p>
+            <h5 class="card-title"><?php echo $pic_array[2]->get_name();?></h5>
+            <p class="card-text"><?php echo $pic_array[2]->get_date();?><br><?php echo $pic_array[2]->get_location();?><br><?php echo $pic_array[2]->get_photographer();?></p>
           </div>
         </div>
       </div>
@@ -187,31 +194,14 @@
     <div class="row">
       <div class="col-4">
         <div class="card">
-          <img src="testPic3.png" class="card-img-top" alt="...">
+          <img src=<?php echo $pic_array[3]->get_photo_file(); ?> class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">Date Taken<br>Location<br>Photographer</p>
+            <h5 class="card-title"><?php echo $pic_array[3]->get_name();?></h5>
+            <p class="card-text"><?php echo $pic_array[3]->get_date();?><br><?php echo $pic_array[3]->get_location();?><br><?php echo $pic_array[3]->get_photographer();?></p>
           </div>
         </div>
       </div>
-      <div class="col-4">
-        <div class="card">
-          <img src="testPic2.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">Date Taken<br>Location<br>Photographer</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="card">
-          <img src="testPic.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">Date Taken<br>Location<br>Photographer</p>
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 
