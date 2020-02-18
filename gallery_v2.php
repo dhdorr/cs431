@@ -95,21 +95,13 @@
       return $this->photo_file;
     }
   }
-  #Stores most recent photo upload as a Photo class
-  $pic = new Photo();
-  $pic->set_name($_POST["pname"]);
-  $pic->set_date($_POST["date"]);
-  $pic->set_location($_POST["location"]);
-  $pic->set_photographer($_POST["photoer"]);
-  #If good, assign photo to class variable
-  if ($uploadOk == 1) {
-    $pic->set_photo_file($file);
-  }
 
   #write to text file
-  $my_file = 'uploads/pic_list.txt';
-  $txt = basename($_FILES["uploadfile"]["name"]) . "\n" . $pname . "\n" . $date . "\n" . $location . "\n" . $photoer . "\n";
-  file_put_contents($my_file, $txt, FILE_APPEND);
+  if ($uploadOk == 1) {
+    $my_file = 'uploads/pic_list.txt';
+    $txt = basename($_FILES["uploadfile"]["name"]) . "\n" . $pname . "\n" . $date . "\n" . $location . "\n" . $photoer . "\n";
+    file_put_contents($my_file, $txt, FILE_APPEND);
+  }
 
   #Check the pic_list.txt for previous uploads and append them to array of Photos
   $pic_array = array();
