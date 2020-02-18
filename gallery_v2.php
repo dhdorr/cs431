@@ -130,8 +130,13 @@
     }
   }
   fclose($read_file);
-
-  #Html display is currently hard coded, not sure how to use php to loop the display method
+  // Comparator function used for comparator 
+  function comparator($object1, $object2)
+  {
+    return $object1->get_name() > $object2->get_name();
+  }
+  // Sorting the class objects according select comparator
+  usort($pic_array, 'comparator');
   ?>
 
   <br><br>
