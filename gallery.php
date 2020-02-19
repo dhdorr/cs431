@@ -88,6 +88,16 @@
     #echo "Sorry, file already exists.";
     #$uploadOk = 0;
     #}
+    #check if uploadfile is jepg/png
+    $info = getimagesize($_FILES['uploadfile']['tmp_name']);
+
+    if ($info === FALSE) {
+      $uploadOk = 0;
+    }
+    if (($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
+      $uploadOk = 0;
+    }
+
     #checks if the upload is ok
     if ($uploadOk == 0) {
       echo "File failed to upload";
