@@ -19,7 +19,7 @@
 <body>
 
   <?php
-  $sortBy = "none";
+  $sortBy = "Select one";
   #Photo class so each photo's info can be saved to an array
   class Photo
   {
@@ -71,40 +71,40 @@
     }
   }
 
-  if(isset($_POST["pname"])){
-  // create short variable names
-  $pname = trim($_POST["pname"]);
-  $date = trim($_POST["date"]);
-  $location = trim($_POST["location"]);
-  $photoer = trim($_POST["photoer"]);
-  #Form handling & checks if image is ok to upload
-  $dir = "uploads/";
-  $file = $dir . basename($_FILES["uploadfile"]["name"]);
-  echo $file;
-  $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-  #check if file exists already
-  #if (file_exists($file)) {
+  if (isset($_POST["pname"])) {
+    // create short variable names
+    $pname = trim($_POST["pname"]);
+    $date = trim($_POST["date"]);
+    $location = trim($_POST["location"]);
+    $photoer = trim($_POST["photoer"]);
+    #Form handling & checks if image is ok to upload
+    $dir = "uploads/";
+    $file = $dir . basename($_FILES["uploadfile"]["name"]);
+    echo $file;
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+    #check if file exists already
+    #if (file_exists($file)) {
     #echo "Sorry, file already exists.";
     #$uploadOk = 0;
-  #}
-  #checks if the upload is ok
-  if ($uploadOk == 0) {
-    echo "File failed to upload";
-  } else {
-    if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $file)) {
-      echo "Good.";
+    #}
+    #checks if the upload is ok
+    if ($uploadOk == 0) {
+      echo "File failed to upload";
     } else {
-      echo "Bad";
+      if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $file)) {
+        echo "Good.";
+      } else {
+        echo "Bad";
+      }
+    }
+    #write to text file
+    if ($uploadOk == 1) {
+      $my_file = 'uploads/pic_list.txt';
+      $txt = basename($_FILES["uploadfile"]["name"]) . "\n" . $pname . "\n" . $date . "\n" . $location . "\n" . $photoer . "\n";
+      file_put_contents($my_file, $txt, FILE_APPEND);
     }
   }
-  #write to text file
-  if ($uploadOk == 1) {
-    $my_file = 'uploads/pic_list.txt';
-    $txt = basename($_FILES["uploadfile"]["name"]) . "\n" . $pname . "\n" . $date . "\n" . $location . "\n" . $photoer . "\n";
-    file_put_contents($my_file, $txt, FILE_APPEND);
-  }
-}
 
   #Check the pic_list.txt for previous uploads and append them to array of Photos
   $pic_array = array();
@@ -133,9 +133,8 @@
     }
   }
   fclose($read_file);
-
   // Sorting the class objects according select comparator
-  if(isset($_GET['sortBy'])){
+  if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
     usort($pic_array, 'comparator');
     #sort($pic_array);
@@ -148,19 +147,19 @@
   {
     #$sortBy = "location";
     $sortBy = $_GET['sortBy'];
-    switch($sortBy){
-      case 'name':
+    switch ($sortBy) {
+      case 'Name':
         return strcmp($object1->get_name(), $object2->get_name());
         break;
-      case "date":
+      case "Date":
         return strcmp($object1->get_date(), $object2->get_date());
         break;
-      case "photoer":
-      return strcmp($object1->get_photographer(), $object2->get_photographer());
-      break;
-    case "location":
-      return strcmp($object1->get_location(), $object2->get_location());
-      break;
+      case "Photographer":
+        return strcmp($object1->get_photographer(), $object2->get_photographer());
+        break;
+      case "Location":
+        return strcmp($object1->get_location(), $object2->get_location());
+        break;
     }
   }
   ?>
@@ -185,13 +184,13 @@
 
           <div class="dropdown">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Name
+              <?php echo $sortBy ?>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="?sortBy=name" id=sortname>Name</a>
-              <a class="dropdown-item" href="?sortBy=date" id=sorttime>Date </a>
-              <a class="dropdown-item" href="?sortBy=photoer" id=sortphotoer> Photographer</a>
-              <a class="dropdown-item" href="?sortBy=location" id=sortlocation>Location</a>
+              <a class="dropdown-item" href="?sortBy=Name" id=sortname>Name</a>
+              <a class="dropdown-item" href="?sortBy=Date" id=sorttime>Date </a>
+              <a class="dropdown-item" href="?sortBy=Photographer" id=sortphotoer> Photographer</a>
+              <a class="dropdown-item" href="?sortBy=Location" id=sortlocation>Location</a>
             </div>
           </div>
         </div>
