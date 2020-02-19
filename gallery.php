@@ -149,7 +149,7 @@
     usort($pic_array, 'comparator');
     #sort($pic_array);
     #echo $_GET['sortBy'];
-    echo $sortBy;
+    
   }
 
   // Comparator function used for comparator
@@ -162,7 +162,7 @@
         return strcmp($object1->get_name(), $object2->get_name());
         break;
       case "Date":
-        return strcmp($object1->get_date(), $object2->get_date());
+        return strcmp(strtotime($object1->get_date()), strtotime($object2->get_date()));
         break;
       case "Photographer":
         return strcmp($object1->get_photographer(), $object2->get_photographer());
@@ -205,9 +205,8 @@
           </div>
         </div>
       </div>
-      <div class="col-5">
-      </div>
-      <div class="col-4">
+
+      <div class="col-2 offset-7">
         <a href="index.html" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Upload Photo</a>
       </div>
     </div>
