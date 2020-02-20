@@ -77,11 +77,14 @@
     $date = trim($_POST["date"]);
     $location = trim($_POST["location"]);
     $photoer = trim($_POST["photoer"]);
+    $document_root = $_SERVER['DOCUMENT_ROOT'];
+    
     #Form handling & checks if image is ok to upload
-    $dir = "uploads/";
+    $dir ="uploads/";
     $file = $dir . basename($_FILES["uploadfile"]["name"]);
     echo $file;
     $uploadOk = 1;
+    exec("chmod -R 0777 uploads/");
     $imageFileType = strtolower(pathinfo($file, PATHINFO_EXTENSION));
     #check if file exists already
     #if (file_exists($file)) {
@@ -186,8 +189,8 @@
     <br>
 
     <div class="row justify-content-start">
-      <div class="col-auto">
-        <div class="input-group mb-3">
+      <div class="col-3">
+        <div class="input-group mb-0">
           <div class="input-group-prepend">
             <label class="input-group-text" for="inputGroupSelect01">Sort By:</label>
           </div>
@@ -218,7 +221,7 @@
 
         <div class="col-4">
           <div class="card">
-            <img class="card-img-top" src=<?php echo $pic_array->get_photo_file(); ?> alt="card image cap">
+            <img class="card-img-top" src=<?php echo "uploads/".$pic_array->get_photo_file(); ?> alt="card image cap">
             <div class="card-body">
               <h5 class="card-title"><?php echo $pic_array->get_name(); ?></h5>
               <p class="card-text"><?php echo $pic_array->get_date(); ?><br><?php echo $pic_array->get_location(); ?><br><?php echo $pic_array->get_photographer(); ?></p>
