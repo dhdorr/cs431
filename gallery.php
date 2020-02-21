@@ -14,10 +14,6 @@
       object-fit: cover;
     }
   </style>
-</head>
-
-<body>
-
   <?php
   $sortBy = "Select one";
   #Photo class so each photo's info can be saved to an array
@@ -77,20 +73,13 @@
     $date = trim($_POST["date"]);
     $location = trim($_POST["location"]);
     $photoer = trim($_POST["photoer"]);
-    $document_root = $_SERVER['DOCUMENT_ROOT'];
-    
+
     #Form handling & checks if image is ok to upload
-    $dir ="uploads/";
+    $dir = "uploads/";
     $file = $dir . basename($_FILES["uploadfile"]["name"]);
-    echo $file;
     $uploadOk = 1;
-    exec("chmod -R 0777 uploads/");
     $imageFileType = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-    #check if file exists already
-    #if (file_exists($file)) {
-    #echo "Sorry, file already exists.";
-    #$uploadOk = 0;
-    #}
+
     #check if uploadfile is jepg/png
     $info = getimagesize($_FILES['uploadfile']['tmp_name']);
 
@@ -106,9 +95,9 @@
       echo "File failed to upload";
     } else {
       if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $file)) {
-        echo "Good.";
+        echo "upload success";
       } else {
-        echo "Bad";
+        echo "File failed to upload";
       }
     }
     #write to text file
@@ -150,15 +139,11 @@
   if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
     usort($pic_array, 'comparator');
-    #sort($pic_array);
-    #echo $_GET['sortBy'];
-    
   }
 
   // Comparator function used for comparator
   function comparator($object1, $object2)
   {
-    #$sortBy = "location";
     $sortBy = $_GET['sortBy'];
     switch ($sortBy) {
       case 'Name':
@@ -176,7 +161,9 @@
     }
   }
   ?>
+</head>
 
+<body>
   <br><br>
 
   <div class="container">
@@ -189,12 +176,12 @@
     <br>
 
     <div class="row justify-content-start">
-      <div class="col-3">
+      <div class="col-4">
         <div class="input-group mb-0">
           <div class="input-group-prepend">
             <label class="input-group-text" for="inputGroupSelect01">Sort By:</label>
           </div>
-
+          <!-- dropdown button for sort -->
           <div class="dropdown">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?php echo $sortBy ?>
@@ -208,20 +195,21 @@
           </div>
         </div>
       </div>
-
-      <div class="col-2 offset-7">
+      <!-- upload button  -->
+      <div class="col-2 offset-6">
         <a href="index.html" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Upload Photo</a>
       </div>
     </div>
 
 
     <br>
+    <!-- use foreach loop to display all image in uploads folder -->
     <div class="card-deck">
       <?php foreach ($pic_array as $pic_array) : ?>
 
         <div class="col-4">
           <div class="card">
-            <img class="card-img-top" src=<?php echo "uploads/".$pic_array->get_photo_file(); ?> alt="card image cap">
+            <img class="card-img-top" src=<?php echo "uploads/" . $pic_array->get_photo_file(); ?> alt="card image cap">
             <div class="card-body">
               <h5 class="card-title"><?php echo $pic_array->get_name(); ?></h5>
               <p class="card-text"><?php echo $pic_array->get_date(); ?><br><?php echo $pic_array->get_location(); ?><br><?php echo $pic_array->get_photographer(); ?></p>
