@@ -1,18 +1,25 @@
-CS431 Assignment1 
+CS431 Assignment1
 Team member:
 Name:Yixiang Yan CWID:887411478
-Name:Derek Dorr CWID:
+Name:Derek Dorr CWID:890792021
 
 Contributions:
-Yixiang Yan: 
-finish index.html; 
-fix UI;
-add check if uploadfile is image file;  
-implement sort function with Partner; 
-add loop to display all image in uploads folder;
-test,debug and make improvement; 
-Derek Dorr:
 
+Yixiang Yan:
+finish index.html;
+fix UI;
+add check if uploadfile is image file;
+implement sort function with Partner;
+add loop to display all image in uploads folder;
+test,debug and make improvement;
+
+Derek Dorr:
+Set up gallery.php
+implemented bootstrap
+implemented form submission
+set up sorting function
+implemented file upload and checking
+created photo object to read from text file
 
 <!doctype html>
 <html lang="en">
