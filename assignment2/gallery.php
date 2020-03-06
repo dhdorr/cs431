@@ -125,7 +125,7 @@
   // Sorting using SQL statement
   if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
-    sortInSQL($sortBy);
+    sortInSQL($sortBy, $db);
     //usort($pic_array, 'comparator');
   }
   else {
@@ -146,7 +146,7 @@
     }
   }
 
-  function sortInSQL($sortParam)
+  function sortInSQL($sortParam, $db)
   {
     switch ($sortParam) {
       case 'Name':

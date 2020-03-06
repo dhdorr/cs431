@@ -72,7 +72,7 @@
   $password = "";
   $database = "cs431s47";
   //creat connection
-  $db = mysqli_connect($servername, $username, $password, $database);
+  $db = mysqli_connect($servername, $username, $password, $database, '3307');
   //check connection
   if (!$db) {
     die("connection failed" . mysqli_connect_error());
