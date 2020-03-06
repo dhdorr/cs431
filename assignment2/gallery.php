@@ -122,26 +122,60 @@
   }
   //save data from database to object array
   $pic_array = array();
-  $query = "SELECT * FROM images";
-  $stmt = $db->prepare($query);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  while ($data = $result->fetch_assoc()) {
-    $pic = new Photo();
-    $pic->set_photo_file($data["filename"]);
-    $pic->set_name($data["photoname"]);
-    $pic->set_date($data["date"]);
-    $pic->set_location($data["location"]);
-    $pic->set_photographer($data["photographer"]);
-    if ($pic->get_photo_file() != null) {
-      array_push($pic_array, $pic);
+  // Sorting using SQL statement
+  if (isset($_GET['sortBy'])) {
+    $sortBy = $_GET['sortBy'];
+    sortInSQL($sortBy);
+    //usort($pic_array, 'comparator');
+  }
+  else {
+    $query = "SELECT * FROM images";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($data = $result->fetch_assoc()) {
+      $pic = new Photo();
+      $pic->set_photo_file($data["filename"]);
+      $pic->set_name($data["photoname"]);
+      $pic->set_date($data["date"]);
+      $pic->set_location($data["location"]);
+      $pic->set_photographer($data["photographer"]);
+      if ($pic->get_photo_file() != null) {
+        array_push($pic_array, $pic);
+      }
     }
   }
 
-  // Sorting the class objects according select comparator
-  if (isset($_GET['sortBy'])) {
-    $sortBy = $_GET['sortBy'];
-    usort($pic_array, 'comparator');
+  function sortInSQL($sortParam)
+  {
+    switch ($sortParam) {
+      case 'Name':
+        $query = "SELECT * FROM images ORDER BY photoname DESC";
+        break;
+      case "Date":
+        $query = "SELECT * FROM images ORDER BY date DESC";
+        break;
+      case "Photographer":
+        $query = "SELECT * FROM images ORDER BY photographer DESC";
+        break;
+      case "Location":
+        $query = "SELECT * FROM images ORDER BY location DESC";
+        break;
+    }
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($data = $result->fetch_assoc()) {
+      $pic = new Photo();
+      $pic->set_photo_file($data["filename"]);
+      $pic->set_name($data["photoname"]);
+      $pic->set_date($data["date"]);
+      $pic->set_location($data["location"]);
+      $pic->set_photographer($data["photographer"]);
+      if ($pic->get_photo_file() != null) {
+        array_push($pic_array, $pic);
+      }
+    }
   }
 
   // Comparator function used for comparator

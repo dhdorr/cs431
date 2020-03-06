@@ -66,13 +66,24 @@
       return $this->photo_file;
     }
   }
-
+  //connect to database
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "cs431s47";
+  //creat connection
+  $db = mysqli_connect($servername, $username, $password, $database);
+  //check connection
+  if (!$db) {
+    die("connection failed" . mysqli_connect_error());
+  }
   if (isset($_POST["pname"])) {
     // create short variable names
     $pname = trim($_POST["pname"]);
     $date = trim($_POST["date"]);
     $location = trim($_POST["location"]);
     $photoer = trim($_POST["photoer"]);
+    $filename = basename($_FILES["uploadfile"]["name"]);
 
     #Form handling & checks if image is ok to upload
     $dir = "uploads/";
@@ -100,45 +111,72 @@
         echo "File failed to upload";
       }
     }
-    #write to text file
-    if ($uploadOk == 1) {
-      $my_file = 'uploads/pic_list.txt';
-      $txt = basename($_FILES["uploadfile"]["name"]) . "\n" . $pname . "\n" . $date . "\n" . $location . "\n" . $photoer . "\n";
-      file_put_contents($my_file, $txt, FILE_APPEND);
-    }
-  }
 
-  #Check the pic_list.txt for previous uploads and append them to array of Photos
-  $pic_array = array();
-  $read_file = fopen("uploads/pic_list.txt", "r") or die("Whoops!");
-  while (!feof($read_file)) {
-    $pic = new Photo();
-    for ($x = 0; $x < 5; $x++) {
-      if ($x == 0) {
-        $pic->set_photo_file(fgets($read_file));
-      }
-      if ($x == 1) {
-        $pic->set_name(fgets($read_file));
-      }
-      if ($x == 2) {
-        $pic->set_date(fgets($read_file));
-      }
-      if ($x == 3) {
-        $pic->set_location(fgets($read_file));
-      }
-      if ($x == 4) {
-        $pic->set_photographer(fgets($read_file));
-      }
-    }
-    if ($pic->get_photo_file() != null) {
-      array_push($pic_array, $pic);
+    //insert image meta data into database
+    if ($uploadOk == 1) {
+    $query = "INSERT INTO images (filename, photoname, date, location, photographer ) VALUES (?,?,?,?,?) ";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('sssss', $filename, $pname, $date, $location,  $photoer);
+    $stmt->execute();
     }
   }
-  fclose($read_file);
+  //save data from database to object array
+  $pic_array = array();
   // Sorting the class objects according select comparator
   if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
-    usort($pic_array, 'comparator');
+    sortInSQL($sortBy);
+    //usort($pic_array, 'comparator');
+  }
+  else {
+    $query = "SELECT * FROM images";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($data = $result->fetch_assoc()) {
+      $pic = new Photo();
+      $pic->set_photo_file($data["filename"]);
+      $pic->set_name($data["photoname"]);
+      $pic->set_date($data["date"]);
+      $pic->set_location($data["location"]);
+      $pic->set_photographer($data["photographer"]);
+      if ($pic->get_photo_file() != null) {
+        array_push($pic_array, $pic);
+      }
+    }
+  }
+
+
+  function sortInSQL($sortParam)
+  {
+    switch ($sortParam) {
+      case 'Name':
+        $query = "SELECT * FROM images ORDER BY photoname DESC";
+        break;
+      case "Date":
+        $query = "SELECT * FROM images ORDER BY date DESC";
+        break;
+      case "Photographer":
+        $query = "SELECT * FROM images ORDER BY photographer DESC";
+        break;
+      case "Location":
+        $query = "SELECT * FROM images ORDER BY location DESC";
+        break;
+    }
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($data = $result->fetch_assoc()) {
+      $pic = new Photo();
+      $pic->set_photo_file($data["filename"]);
+      $pic->set_name($data["photoname"]);
+      $pic->set_date($data["date"]);
+      $pic->set_location($data["location"]);
+      $pic->set_photographer($data["photographer"]);
+      if ($pic->get_photo_file() != null) {
+        array_push($pic_array, $pic);
+      }
+    }
   }
 
   // Comparator function used for comparator
@@ -160,6 +198,7 @@
         break;
     }
   }
+
   ?>
 </head>
 
