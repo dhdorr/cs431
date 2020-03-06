@@ -108,6 +108,7 @@
       if (move_uploaded_file($_FILES["uploadfile"]["tmp_name"], $file)) {
         echo "upload success";
       } else {
+        $uploadOk = 0;
         echo "File failed to upload";
       }
     }
@@ -125,7 +126,7 @@
   // Sorting using SQL statement
   if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
-    sortInSQL($sortBy, $db);
+    sortInSQL($sortBy,$db,$pic_array);
     //usort($pic_array, 'comparator');
   }
   else {
@@ -146,7 +147,7 @@
     }
   }
 
-  function sortInSQL($sortParam, $db)
+  function sortInSQL($sortParam,$db,&$pic_array)
   {
     switch ($sortParam) {
       case 'Name':
