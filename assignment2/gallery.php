@@ -117,7 +117,7 @@
 
     //insert image meta data into database
     if ($uploadOk == 1) {
-    $query = "INSERT INTO images (filename, photoname, dates, location, photographer ) VALUES (?,?,?,?,?) ";
+    $query = "INSERT INTO images (filename, photoname, date, location, photographer ) VALUES (?,?,?,?,?) ";
     $stmt = $db->prepare($query);
     $stmt->bind_param('sssss', $filename, $pname, $newdate, $location,  $photoer);
     $stmt->execute();
@@ -140,7 +140,7 @@
       $pic = new Photo();
       $pic->set_photo_file($data["filename"]);
       $pic->set_name($data["photoname"]);
-      $pic->set_date($data["dates"]);
+      $pic->set_date($data["date"]);
       $pic->set_location($data["location"]);
       $pic->set_photographer($data["photographer"]);
       if ($pic->get_photo_file() != null) {
@@ -156,7 +156,7 @@
         $query = "SELECT * FROM images ORDER BY photoname DESC";
         break;
       case "Date":
-        $query = "SELECT * FROM images ORDER BY dates DESC";
+        $query = "SELECT * FROM images ORDER BY date DESC";
         break;
       case "Photographer":
         $query = "SELECT * FROM images ORDER BY photographer DESC";
@@ -172,7 +172,7 @@
       $pic = new Photo();
       $pic->set_photo_file($data["filename"]);
       $pic->set_name($data["photoname"]);
-      $pic->set_date($data["dates"]);
+      $pic->set_date($data["date"]);
       $pic->set_location($data["location"]);
       $pic->set_photographer($data["photographer"]);
       if ($pic->get_photo_file() != null) {
