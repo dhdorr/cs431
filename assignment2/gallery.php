@@ -68,26 +68,27 @@
     }
   }
 
-  function sortInSQL($sortParam,$db,&$pic_array)
+  function sortInSQL($sortParam, $db, &$pic_array)
   {
     switch ($sortParam) {
       case 'Name':
-        $query = "SELECT * FROM images ORDER BY photoname DESC";
+        $query = "SELECT * FROM Images ORDER BY photoname DESC";
         break;
       case "Date":
-        $query = "SELECT * FROM images ORDER BY date DESC";
+        $query = "SELECT * FROM Images ORDER BY date DESC";
         break;
       case "Photographer":
-        $query = "SELECT * FROM images ORDER BY photographer DESC";
+        $query = "SELECT * FROM Images ORDER BY photographer DESC";
         break;
       case "Location":
-        $query = "SELECT * FROM images ORDER BY location DESC";
+        $query = "SELECT * FROM Images ORDER BY location DESC";
         break;
     }
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($data = $result->fetch_assoc()) {
+    //    $stmt = $db->prepare($query);
+    //    $stmt->execute();
+    //    $result = $stmt->get_result();
+    //    while ($data = $result->fetch_assoc()) {
+    foreach ($db->query($query) as $data) {
       $pic = new Photo();
       $pic->set_photo_file($data["filename"]);
       $pic->set_name($data["photoname"]);
@@ -151,10 +152,10 @@
 
     //insert image meta data into database
     if ($uploadOk == 1) {
-    $query = "INSERT INTO images (filename, photoname, date, location, photographer ) VALUES (?,?,?,?,?) ";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param('sssss', $filename, $pname, $newdate, $location,  $photoer);
-    $stmt->execute();
+      $query = "INSERT INTO Images (filename, photoname, date, location, photographer ) VALUES (?,?,?,?,?) ";
+      $stmt = $db->prepare($query);
+      $stmt->bind_param('sssss', $filename, $pname, $newdate, $location,  $photoer);
+      $stmt->execute();
     }
   }
   //save data from database to object array
@@ -162,14 +163,14 @@
   // Sorting using SQL statement
   if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
-    sortInSQL($sortBy,$db,$pic_array);
-  }
-  else {
+    sortInSQL($sortBy, $db, $pic_array);
+  } else {
     $query = "SELECT * FROM images";
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($data = $result->fetch_assoc()) {
+    //    $stmt = $db->prepare($query);
+    //    $stmt->execute();
+    //    $result = $stmt->get_result();
+    //    while ($data = $result->fetch_assoc()) {
+    foreach ($db->query($query) as $data) {
       $pic = new Photo();
       $pic->set_photo_file($data["filename"]);
       $pic->set_name($data["photoname"]);
