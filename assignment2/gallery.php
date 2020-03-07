@@ -14,6 +14,7 @@
       object-fit: cover;
     }
   </style>
+
   <?php
   $sortBy = "Select one";
   #Photo class so each photo's info can be saved to an array
@@ -66,6 +67,39 @@
       return $this->photo_file;
     }
   }
+
+  function sortInSQL($sortParam,$db,&$pic_array)
+  {
+    switch ($sortParam) {
+      case 'Name':
+        $query = "SELECT * FROM images ORDER BY photoname DESC";
+        break;
+      case "Date":
+        $query = "SELECT * FROM images ORDER BY date DESC";
+        break;
+      case "Photographer":
+        $query = "SELECT * FROM images ORDER BY photographer DESC";
+        break;
+      case "Location":
+        $query = "SELECT * FROM images ORDER BY location DESC";
+        break;
+    }
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($data = $result->fetch_assoc()) {
+      $pic = new Photo();
+      $pic->set_photo_file($data["filename"]);
+      $pic->set_name($data["photoname"]);
+      $pic->set_date($data["date"]);
+      $pic->set_location($data["location"]);
+      $pic->set_photographer($data["photographer"]);
+      if ($pic->get_photo_file() != null) {
+        array_push($pic_array, $pic);
+      }
+    }
+  }
+
   //connect to database
   $servername = "localhost";
   $username = "root";
@@ -129,7 +163,6 @@
   if (isset($_GET['sortBy'])) {
     $sortBy = $_GET['sortBy'];
     sortInSQL($sortBy,$db,$pic_array);
-    //usort($pic_array, 'comparator');
   }
   else {
     $query = "SELECT * FROM images";
@@ -149,58 +182,6 @@
     }
   }
 
-  function sortInSQL($sortParam,$db,&$pic_array)
-  {
-    switch ($sortParam) {
-      case 'Name':
-        $query = "SELECT * FROM images ORDER BY photoname DESC";
-        break;
-      case "Date":
-        $query = "SELECT * FROM images ORDER BY date DESC";
-        break;
-      case "Photographer":
-        $query = "SELECT * FROM images ORDER BY photographer DESC";
-        break;
-      case "Location":
-        $query = "SELECT * FROM images ORDER BY location DESC";
-        break;
-    }
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($data = $result->fetch_assoc()) {
-      $pic = new Photo();
-      $pic->set_photo_file($data["filename"]);
-      $pic->set_name($data["photoname"]);
-      $pic->set_date($data["date"]);
-      $pic->set_location($data["location"]);
-      $pic->set_photographer($data["photographer"]);
-      if ($pic->get_photo_file() != null) {
-        array_push($pic_array, $pic);
-      }
-    }
-  }
-
-  // Comparator function used for comparator
-  function comparator($object1, $object2)
-  {
-    $sortBy = $_GET['sortBy'];
-    switch ($sortBy) {
-      case 'Name':
-        return strcmp($object1->get_name(), $object2->get_name());
-        break;
-      case "Date":
-        return strcmp(strtotime($object1->get_date()), strtotime($object2->get_date()));
-        break;
-      case "Photographer":
-        return strcmp($object1->get_photographer(), $object2->get_photographer());
-        break;
-      case "Location":
-        return strcmp($object1->get_location(), $object2->get_location());
-        break;
-    }
-  }
-
   ?>
 </head>
 
@@ -217,7 +198,7 @@
     <br>
 
     <div class="row justify-content-start">
-      <div class="col-4">
+      <div class="col-6">
         <div class="input-group mb-0">
           <div class="input-group-prepend">
             <label class="input-group-text" for="inputGroupSelect01">Sort By:</label>
@@ -237,12 +218,13 @@
         </div>
       </div>
       <!-- upload button  -->
-      <div class="col-2 offset-6">
+      <div class="col-2 offset-4">
         <a href="index.html" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Upload Photo</a>
       </div>
     </div>
 
 
+    <br>
     <br>
     <!-- use foreach loop to display all image in uploads folder -->
     <div class="card-deck">
