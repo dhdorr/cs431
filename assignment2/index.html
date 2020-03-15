@@ -70,7 +70,7 @@
                     <h2>Photo name:</h2>
                 </div>
                 <div class="col-3">
-                    <input type="text" name="pname">
+                    <input type="text" name="pname" required>
                 </div>
             </div>
 
@@ -79,7 +79,8 @@
                     <h2>Date taken:</h2>
                 </div>
                 <div class="col-3">
-                    <input type="text" name="date" placeholder="YYYY-MM-DD">
+                    <input type="date" class="form-control" id="validationToolTip" name="date" placeholder="YYYY-MM-DD" required>
+                    <div class="invalid-tooltip">Please Enter Valid Date </div>
                 </div>
             </div>
             <div class="row">
@@ -87,7 +88,7 @@
                     <h2>Photographer:</h2>
                 </div>
                 <div class="col-3">
-                    <input type="text" name="photoer">
+                    <input type="text" name="photoer" required>
                 </div>
             </div>
             <div class="row">
@@ -95,7 +96,7 @@
                     <h2>Location:</h2>
                 </div>
                 <div class="col-3">
-                    <input type="text" name="location">
+                    <input type="text" name="location" required>
                 </div>
             </div>
 
@@ -103,7 +104,7 @@
                 <div class="col-3 offset-3">
                     <div class="upload-btn-wrapper">
                         <button class="btn">Select file</button>
-                        <input type="file" name="uploadfile">
+                        <input type="file" name="uploadfile" required>
                     </div>
                 </div>
             </div>
@@ -119,6 +120,21 @@
 
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    (function(){
+      'use strict';
+      window.addEventListener('load', function(){
+        var forms = document.getElementByClassName('gallery.php');
+        var validation = Array.prototype.filter.call(forms, function(form){
+          form.addEventListener('submit', function(event){
+            if (form.checkValidity() === false){
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classlist.add('was-validated');
+          }, false);
+        });
+      }, false);
+    }) ();
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 </body>
