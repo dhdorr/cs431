@@ -11,7 +11,10 @@ code for insert image meta data into database and select image data from databas
 fix error and bugs;
 
 Derek Dorr:
-
+implemented requirements for inputs in Index form
+converted gallery to read from the database and display
+fixed how dates are handled with the database
+created sorting with SQL queries
 
 <!doctype html>
 <html lang="en">
