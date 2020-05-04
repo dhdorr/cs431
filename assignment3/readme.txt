@@ -4,13 +4,15 @@ Name:Yixiang Yan CWID:887411478
 Name:Derek Dorr CWID:890792021
 
 Contributions:
-Yixiang Yan: 
+Yixiang Yan:
 add nickname and color to database;
 add page for enter nickname before enter chat room;
 modifications to the server code to add random color for each user and  nickname to database;
-modifications to the client code to send nickname to server and display new feature; 
+modifications to the client code to send nickname to server and display new feature;
 
 Derek Dorr:
+Created database table
+Tested security against sql injections
 
 <?php
 $hostname = "mariadb";
@@ -28,7 +30,7 @@ if (mysqli_connect_errno()) {
    Please try again later.</p>';
    exit;
 }
-//helper funtion to replace get_results() if without mysqlnd 
+//helper funtion to replace get_results() if without mysqlnd
 function get_result( $Statement ) {
     $RESULT = array();
     $Statement->store_result();
@@ -48,13 +50,13 @@ function random_color() {
     return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
 }
 
-try { 
+try {
     $currentTime = time();
     $session_id = session_id();
     //get nickname and random color
-    $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : '';  
+    $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : '';
     $color=random_color();
-    $lastPoll = isset($_SESSION['last_poll']) ? $_SESSION['last_poll'] : $currentTime;    
+    $lastPoll = isset($_SESSION['last_poll']) ? $_SESSION['last_poll'] : $currentTime;
     $action = isset($_SERVER['REQUEST_METHOD']) && ($_SERVER['REQUEST_METHOD'] == 'POST') ? 'send' : 'poll';
     switch($action) {
         case 'poll':
@@ -65,13 +67,13 @@ try {
            $result = get_result( $stmt);
            $newChats = [];
            while($chat = array_shift($result)) {
-               
+
                if($session_id == $chat['sent_by']) {
                   $chat['sent_by'] = 'self';
                } else {
                   $chat['sent_by'] = 'other';
                }
-             
+
                $newChats[] = $chat;
             }
            $_SESSION['last_poll'] = $currentTime;
@@ -82,7 +84,7 @@ try {
            ]);
            exit;
         case 'send':
-            $message = isset($_POST['message']) ? $_POST['message'] : '';            
+            $message = isset($_POST['message']) ? $_POST['message'] : '';
             $message = strip_tags($message);
              //check if the new user get color
             $result = $db->query("SELECT color FROM chatlog WHERE sent_by = '$session_id' ");
@@ -90,11 +92,11 @@ try {
                 $obj=$result->fetch_object();
                 $color=$obj->color;
             }
-           
+
             $query = "INSERT INTO chatlog (message, sent_by, date_created, nickname, color ) VALUES(?, ?, ?, ?, ?)";
             $stmt = $db->prepare($query);
-            $stmt->bind_param('ssiss', $message, $session_id, $currentTime, $nickname, $color); 
-            $stmt->execute(); 
+            $stmt->bind_param('ssiss', $message, $session_id, $currentTime, $nickname, $color);
+            $stmt->execute();
             print json_encode(['success' => true]);
             exit;
     }
