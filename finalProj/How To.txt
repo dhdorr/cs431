@@ -1,0 +1,12 @@
+reference video: https://www.youtube.com/watch?v=LC9GaXkdxF8&list=LLLw1kHcjTdv7yyUCWPa9HTQ&index=2&t=0s
+
+. the project layout is divided into many pages, each handles its own function. 
+	I.E. forum.php displays a forum, home.php is the homepage, etc...
+
+. every page should require header.php since it contains the persistant U.I.
+
+. includes folder contains files that handle database connections (dbh.inc.php).
+	They are helper functions that get called from the main web page but never 
+	display anything themselves. I.E. login.php sends login info to login.inc.php, 
+	which querys the database and validates login.
+
