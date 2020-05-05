@@ -27,20 +27,5 @@
         exit();
       }
     }
-
   }
-/*
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-
-  header("Location: ../home.php?login=success");
-  exit();
-}
-else {
-  header("Location: ../home.php?login=fail");
-  echo $conn->error;
-  exit();
-}
-*/
 ?>

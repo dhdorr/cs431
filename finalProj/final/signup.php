@@ -10,7 +10,12 @@
   <body>
     <div class="container-fluid">
       <h2>We are signing up.</h2>
-      <a href="home.php" class="btn btn-dark">Home</a>
+      <form class="form-signup" action="includes/signup.inc.php" method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="nickname" placeholder="Nickname">
+        <input type="text" name="pwd" placeholder="Password">
+        <button type="submit" name="signup_submit" class="btn btn-dark">SIGN UP</button>
+      </form>
     </div>
   </body>
 </html>

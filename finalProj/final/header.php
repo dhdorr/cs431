@@ -19,8 +19,18 @@
           Final Project
         </a>
         <div>
-          <a class="btn btn-outline-primary text-primary" href="login.php">LOG IN</a>
-          <a class="btn btn-primary text-light" href="signup.php">SIGN UP</a>
+          <?php
+            if (isset($_SESSION['uName'])) {
+              echo $_SESSION['uName'];
+              echo "\t";
+              echo '<a class="btn btn-outline-primary text-primary btn-sm" href="includes/logout.inc.php">LOG OUT</a>';
+            }
+            else {
+              echo '<a class="btn btn-outline-primary text-primary" href="login.php">LOG IN</a>';
+              echo "\t";
+              echo '<a class="btn btn-primary text-light" href="signup.php">SIGN UP</a>';
+            }
+          ?>
         </div>
       </nav>
     </div>
