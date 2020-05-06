@@ -14,13 +14,28 @@
       </div>
       <div class="row justify-content-center">
         <?php
+          $isLoggedIn = false;
           //If a session exists, change layout of homepage
           if (isset($_SESSION['uName'])) {
             $name = $_SESSION['uName'];
+            $isLoggedIn = true;
 
             echo "<div class='row justify-content-center'>
                     <h2>".$name."'s Favorite Forums</h2>
                   </div>";
+          }
+          else {
+            //display default layout
+            echo "<div class='row justify-content-center'>
+                    <h2>Log In to View Forums</h2>
+                  </div>";
+          }
+        ?>
+      </div>
+      <div class="row justify-content-center">
+        <?php
+          //If a session exists, change layout of homepage
+          if ($isLoggedIn) {
             //access database to get forums
             require 'includes/dbh.inc.php';
 
@@ -31,7 +46,7 @@
               //get data for each row
               while($row = mysqli_fetch_assoc($result)){
                 //display forums from database
-                echo "<a class='card text-white bg-dark mb-3 w-75' href='forum.php?fname=".$row['f_name']."' id='a'>
+                echo "<a class='card text-white bg-dark mb-3 w-75' href='forum.php?fname=".$row['f_name']."&fid=".$row['f_id']."'>
                             <div class='card-body'>
                               <h5 class='card-title'>".$row['f_name']."</h5>
                               <p class='card-text'>".$row['f_description']."</p>
@@ -44,12 +59,7 @@
             }
             $conn->close();
           }
-          else {
-            //display default layout
-            echo "<div class='row justify-content-center'>
-                    <h2>Log In to View Forums</h2>
-                  </div>";
-          }
+
         ?>
       </div>
     </div>
