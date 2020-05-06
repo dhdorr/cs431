@@ -1,4 +1,5 @@
 <?php
+  $errormsg="";
   if (isset($_POST['login_submit'])) {
     require 'dbh.inc.php';
 
@@ -24,7 +25,8 @@
         exit();
       }
       else {
-        header("Location: ../home.php?login=noUser");
+        $errormsg='Wrong username or password';
+        header("Location: ../login.php?errormsg=$errormsg");
         exit();
       }
     }
