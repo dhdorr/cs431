@@ -6,6 +6,10 @@
     <title>My Sign Up</title>
     <!-- Insert Navbar -->
     <?php require "header.php"; ?>
+    <?php
+      $fid = $_GET['fid'];
+      $_SESSION['fId'] = $fid;
+    ?>
   </head>
   <body>
     <div class="container-fluid">
@@ -19,17 +23,17 @@
           <div class="form-group">
             <label for="makepostTitle">Title</label>
             </br>
-            <input type="text" class = "form-control form-control-lg w-100" placeholder="Title" id="makepostTitle">
+            <input type="text" class = "form-control form-control-lg w-100" placeholder="Title" name="makepostTitle">
           </div>
           <div class="form-group">
             <label for="makepostSubject">Subject</label>
             </br>
-            <input type="text" class = "form-control form-control-lg w-100" placeholder="Subject">
+            <input type="text" class="form-control form-control-lg w-100" placeholder="Subject" name="makepostSubject">
           </div>
           <div class="form-group">
             <label for="makepostBody">Body</label>
             </br>
-            <textarea class="form-control form-control-lg w-100" id="makepostBody" rows="8" placeholder="Body"></textarea>
+            <textarea class="form-control form-control-lg w-100" name="makepostBody" rows="8" placeholder="Body"></textarea>
           </div>
           <button type="submit" name="makepost_submit" class="btn btn-dark">SUBMIT</button>
         </form>

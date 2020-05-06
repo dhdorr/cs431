@@ -32,13 +32,13 @@
               //get data for each post
               while($row = mysqli_fetch_assoc($result)){
                 //display posts from database
-                echo "<a class='card text-white bg-dark mb-3 w-75'>
+                echo "<div class='card text-white bg-dark mb-3 w-75'>
                           <h3 class='card-header'>".$row['p_title']."</h3>
                             <div class='card-body'>
                               <h6 class='card-subtitle'>".$row['p_subject']."</h6>
                               <p class='card-body'>".$row['p_body']."</p>
                             </div>
-                          </a>";
+                          </div>";
               }
             }
             else {

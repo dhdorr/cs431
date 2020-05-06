@@ -18,6 +18,7 @@
       if ($row = mysqli_fetch_assoc($result)) {
         session_start();
         $_SESSION['uName'] = $row['u_name'];
+        $_SESSION['uId'] = $row['u_id'];
 
         header("Location: ../home.php?login=success");
         exit();

@@ -12,14 +12,13 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   </head>
   <body style="background-color: #d0d6db">
-    <div class="container-fluid">
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="home.php">
-          <img src="images/devito.jpg" alt="logo" width=50 height=50>
-          Final Project
-        </a>
-        <div>
-          <?php
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand" href="home.php">
+            <img src="images/devito.jpg" alt="logo" width=50 height=50>
+            Final Project
+          </a>
+          <div>
+            <?php
             if (isset($_SESSION['uName'])) {
               echo $_SESSION['uName'];
               echo "\t";
@@ -30,9 +29,8 @@
               echo "\t";
               echo '<a class="btn btn-primary text-light" href="signup.php">SIGN UP</a>';
             }
-          ?>
-        </div>
-      </nav>
-    </div>
+            ?>
+          </div>
+        </nav>
   </body>
 </html>

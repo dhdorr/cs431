@@ -50,10 +50,15 @@
             }
             $conn->close();
           ?>
+          <?php
+          echo "<a type='button' class='btn btn-secondary btn-sm btn-block w-100' href='home.php'> GO BACK </a>"
+          ?>
         </div>
         <div class="col">
           <div class="row justify-content-center">
-            <a type="button" class="btn btn-primary" href="makepost.php">Create Post</a>
+            <?php
+              echo "<a type='button' class='btn btn-primary' href='makepost.php?fid=".$fid."'>Create Post</a>";
+            ?>
           </div>
         </div>
       </div>
