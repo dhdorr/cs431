@@ -20,7 +20,7 @@
         session_start();
         $_SESSION['uName'] = $row['u_name'];
         $_SESSION['uId'] = $row['u_id'];
-
+        $_SESSION['uAvatar'] = $row['u_avatar'];
         header("Location: ../home.php?login=success");
         exit();
       }
@@ -31,4 +31,3 @@
       }
     }
   }
-?>
