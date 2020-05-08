@@ -98,7 +98,7 @@
             echo "<div class='media w-75 mb-4'>
                     <img src=images/".$cPic." class='align-self-start mr-3 rounded' alt='logo' width=50 height=50>
                     <div class='media-body'>
-                      <h6 class='mt-0'>".$sampleName2."</h6>
+                      <h6 class='mt-0'>".$sampleName2." by ".$row3['c_date']."</h6>
                       ".$row3['c_body']."
                     </div>
                   </div>";

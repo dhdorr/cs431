@@ -48,7 +48,7 @@
                           <h5 class='card-title'>".$row['p_title']."</h5>
                           <p class='card-text'>".$row['p_subject']."</p>
                         </div>
-                        <div class='card-footer text-muted'>Posted By: ".$sampleName."</div>
+                        <div class='card-footer text-muted'>Posted By: ".$sampleName." Post date: ".$row['p_time']."</div>
                       </a>";
               }
             }
