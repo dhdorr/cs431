@@ -46,7 +46,7 @@
                               <h6 class='card-subtitle'>".$row['p_subject']."</h6>
                               <p class='card-body'>".$row['p_body']."</p>
                             </div>
-                            <div class='card-footer text-muted'>Posted By: ".$sampleName."</div>
+                            <div class='card-footer text-muted'>Posted By: ".$sampleName." Post time: ".$row['p_time']."</div>
                           </div>";
               }
             }
