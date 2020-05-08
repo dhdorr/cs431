@@ -16,26 +16,31 @@
 
 
 <body class="text-center">
-  <form class="form-signin" action="includes/login.inc.php" method="post">
+  <div class="row justify-content-center">
+    <div class="col col-3">
+      <form class="form-signin" action="includes/login.inc.php" method="post">
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <?php if(isset($_GET['errormsg'])) {
-      echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
-    } ?>
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <?php if(isset($_GET['errormsg'])) {
+          echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
+        } ?>
 
 
-    <input type="acount" id="useraccount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">
+        <input type="acount" id="useraccount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">
 
-    <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required="">
+        <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required="">
 
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login_submit">Sign in</button>
+
+      </form>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="login_submit">Sign in</button>
+  </div>
 
-  </form>
   <div class="d-flex justify-content-center links">
     Don't have an account?<a href="signup.php">Sign Up</a>
   </div>

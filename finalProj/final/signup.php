@@ -14,35 +14,58 @@
   ?>
 </head>
 
-<body class="text-center">
-  <form class="form-signin" action="includes/signup.inc.php" method="post" enctype="multipart/form-data">
+<body>
+  <div class="row justify-content-center">
+    <div class="col col-3">
+      <form class="form-signin" action="includes/signup.inc.php" method="post" enctype="multipart/form-data">
 
-    <h1 class="h3 mb-3 font-weight-normal">Creat an account</h1>
-    <?php if(isset($_GET['errormsg'])) {
-      echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
-    } ?>
+        <h1 class="h3 mb-3 font-weight-normal">Creat an account</h1>
+        <?php if(isset($_GET['errormsg'])) {
+          echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
+        } ?>
 
+        <label for="uname" class="row justify-content-left px-md-3">Username</label>
+        <input type="acount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">
 
-    <input type="acount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">
+        <label for="unickname" class="row justify-content-left px-md-3">Nickname</label>
+        <input type="acount" name="nickname" class="form-control" placeholder="nick name" required="">
 
-    <input type="acount" name="nickname" class="form-control" placeholder="nick name" required="">
+        <label for="password" class="row justify-content-left px-md-3">Password</label>
+        <input type="password" name="pwd" class="form-control" placeholder="Password" required="">
 
-    <input type="password" name="pwd" class="form-control" placeholder="Password" required="">
+        <label for="repwd" class="row justify-content-left px-md-3">Re-enter Password</label>
+        <input type="password" name="repwd" class="form-control" placeholder="Confirm Password" required="">
 
-    <input type="password" name="repwd" class="form-control" placeholder="Confirm Password" required="">
+        <div class="row">
+        </br>
+        </div>
 
+        <div class="row justify-content-center">
+          <img id="blah" src="#" alt="your image" width=100 height=100>
+        </div>
 
-    <div class="custom-file">
+        <div class="row">
+        </br>
+        </div>
 
-      <input type="file" class="custom-file-input" name="uploadfile" onchange="readURL(this);">
-      <label class="custom-file-label" for="customFile">Upload an avatar</label>
+        <div class="custom-file">
 
+          <input type="file" class="custom-file-input" name="uploadfile" onchange="readURL(this);">
+          <label class="custom-file-label" for="customFile">Upload an avatar</label>
+
+        </div>
+
+        <div class="row">
+        </br>
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit" name="signup_submit">Creat Account</button>
+        <p class="mt-5 mb-3 text-muted">© 2020</p>
+      </form>
     </div>
-    <img id="blah" src="#" alt="your image" width=100 height=100>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="signup_submit">Creat Account</button>
-    <p class="mt-5 mb-3 text-muted">© 2020</p>
-  </form>
+  </div>
+
   <script>
     function readURL(input) {
       if (input.files && input.files[0]) {
