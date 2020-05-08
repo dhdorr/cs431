@@ -12,30 +12,55 @@
       <div class="row justify-content-center">
         <h2>Account Page.</h2>
       </div>
-      <div class="row justify-content-center">
-        <?php
-          echo "Username: ".$_SESSION['uName']."</br>";
-          echo "Nickname: ".$_SESSION['uNickname']."</br>";
-        ?>
+
+      <div class="row">
+      </br>
       </div>
+
       <div class="row justify-content-center">
-        <img src="images/<?php if (!isset($_SESSION['uAvatar']) || strlen($_SESSION['uAvatar']) < 3) {
-                                  echo "myBishop.png";
-                                }
-                                else {
-                                  echo $_SESSION['uAvatar'];
-                                }
-                          ?>" class="img-thumbnail" alt="logo" >
+
+          <img src="images/<?php if (!isset($_SESSION['uAvatar']) || strlen($_SESSION['uAvatar']) < 3) {
+                                    echo "myBishop.png";
+                                  }
+                                  else {
+                                    echo $_SESSION['uAvatar'];
+                                  }
+                            ?>" class="img-thumbnail" alt="logo" >
+
       </div>
+
+      <div class="row">
+      </br>
+      </div>
+
       <div class="row justify-content-center">
-        <img class="img-thumbnail bg-light" id="blah" src="#" alt="your image" width=100 height=100>
+        <div class="col-1">
+          <?php
+            echo "<p>Username: ".$_SESSION['uName']."</br>"."Nickname: ".$_SESSION['uNickname']."</br></p>";
+          ?>
+        </div>
       </div>
+
+      <div class="row">
+      </br>
+      </div>
+
+
+
+      <div class="row">
+      </br>
+      </div>
+
       <div class="row justify-content-center">
         <form class="form-change-avatar" action="includes/avatar.inc.php" method="post" enctype="multipart/form-data">
           <div class="custom-file">
 
             <input type="file" class="custom-file-input" name="uploadfile" onchange="readURL(this);">
             <label class="custom-file-label" for="customFile">Change Avatar?</label>
+
+            <div class="row">
+            </br>
+            </div>
 
             <button type='submit' name='avatarSubmit' class='btn btn-primary btn-sm'> SUBMIT </button>
 
@@ -49,7 +74,7 @@
           var reader = new FileReader();
 
           reader.onload = function(e) {
-            $('#blah').attr('src', e.target.result);
+            //$('#blah').attr('src', e.target.result);
           }
 
           reader.readAsDataURL(input.files[0]);
