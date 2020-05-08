@@ -7,7 +7,7 @@
     $c_body = $_POST['commentBody'];
     $uid = $_SESSION['uId'];
 
-    $query = "INSERT INTO comments (u_id, p_id, c_body) VALUES (?, ?, ?)";
+    $query = "INSERT INTO comments (u_id, p_id, c_date, c_body) VALUES (?, ?, now(), ?)";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $query)) {
       header("Location: ../home.php?error=sqlfailed");
