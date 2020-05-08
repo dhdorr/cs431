@@ -62,6 +62,9 @@
           <?php
           echo "<a type='button' class='btn btn-secondary btn-sm btn-block w-100' href='home.php'> GO BACK </a>"
           ?>
+          <div class="row">
+            </br>
+          </div>
         </div>
         <div class="col">
           <div class="row justify-content-center">

@@ -16,8 +16,8 @@
         <?php
           $isLoggedIn = false;
           //If a session exists, change layout of homepage
-          if (isset($_SESSION['uName'])) {
-            $name = $_SESSION['uName'];
+          if (isset($_SESSION['uNickname'])) {
+            $name = $_SESSION['uNickname'];
             $isLoggedIn = true;
 
             echo "<div class='row justify-content-center'>

@@ -25,7 +25,6 @@
           echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
         } ?>
 
-
         <input type="acount" id="useraccount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">
 
         <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required="">
