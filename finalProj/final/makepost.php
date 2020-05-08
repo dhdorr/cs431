@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row justify-content-center">
+      <div class="row justify-content-center mt-3 mb-5">
         <h2>Create Post</h2>
       </div>
       <div class="row justify-content-center">

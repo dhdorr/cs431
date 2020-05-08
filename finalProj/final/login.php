@@ -20,7 +20,7 @@
     <div class="col col-3">
       <form class="form-signin" action="includes/login.inc.php" method="post">
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <h2 class="h3 mt-3 mb-5 font-weight-normal">Please sign in</h2>
         <?php if(isset($_GET['errormsg'])) {
           echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
         } ?>

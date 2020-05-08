@@ -19,7 +19,7 @@
     <div class="col col-3">
       <form class="form-signin" action="includes/signup.inc.php" method="post" enctype="multipart/form-data">
 
-        <h1 class="h3 mb-3 font-weight-normal">Creat an account</h1>
+        <h2 class="h3 mt-3 mb-5 font-weight-normal text-center">Create an account</h2>
         <?php if(isset($_GET['errormsg'])) {
           echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
         } ?>

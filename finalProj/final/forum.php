@@ -19,8 +19,8 @@
       }
     ?>
     <div class="container-fluid">
-      <div class="row justify-content-center">
-        <h2>We are in <?php echo $fname; ?></h2>
+      <div class="row justify-content-center mt-3 mb-5">
+        <h2><?php echo $fname; ?></h2>
       </div>
       <div class="row">
         <div class="col-9">

@@ -9,8 +9,8 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row justify-content-center">
-        <h2>We are home.</h2>
+      <div class="row justify-content-center mt-3 mb-5">
+        <h2>Welcome to the Forums!</h2>
       </div>
       <div class="row justify-content-center">
         <?php
