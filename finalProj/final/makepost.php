@@ -14,7 +14,7 @@
   <body>
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <h2>We are making posts.</h2>
+        <h2>Create Post</h2>
       </div>
       <div class="row justify-content-center">
         <div class="col-8">

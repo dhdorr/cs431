@@ -34,12 +34,21 @@
             if ($result->num_rows > 0) {
               //get data for each post
               while ($row = mysqli_fetch_assoc($result)) {
+                $sampleId = $row['u_id'];
+                $query2 = "SELECT u_name FROM users WHERE u_id=$sampleId";
+                $result2 = $conn->query($query2);
+                if ($result2->num_rows > 0) {
+                  while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $sampleName = $row2['u_name'];
+                  }
+                }
                 //display posts from database
                 echo "<a class='card text-white bg-dark mb-3 w-100' href='post.php?pid=".$row['p_id']."&fname=".$fname."&fid=".$fid."'>
                         <div class='card-body'>
                           <h5 class='card-title'>".$row['p_title']."</h5>
                           <p class='card-text'>".$row['p_subject']."</p>
                         </div>
+                        <div class='card-footer text-muted'>Posted By: ".$sampleName."</div>
                       </a>";
               }
             }

@@ -16,13 +16,13 @@
 <body style="background-color: #d0d6db">
   <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="home.php">
-      <img src="images/devito.jpg" alt="logo" width=50 height=50>
+      <img src="images/devito.jpg" class="rounded mx-auto" alt="logo" width=50 height=50>
       Final Project
     </a>
     <div>
       <?php
         if (isset($_SESSION['uName'])) {
-          echo $_SESSION['uName'];
+          echo "<a href='account.php' class='text-dark'>".$_SESSION['uName']."</a>";
       ?>
       <img src="images/<?php if (!isset($_SESSION['uAvatar']) || strlen($_SESSION['uAvatar']) < 3) {
                                 echo "myBishop.png";
@@ -30,7 +30,7 @@
                               else {
                                 echo $_SESSION['uAvatar'];
                               }
-                        ?>" alt="logo" width=50 height=50>
+                        ?>" class="img-thumbnail" alt="logo" width=50 height=50>
 
 
       <?php

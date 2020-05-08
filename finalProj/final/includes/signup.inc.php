@@ -30,10 +30,10 @@ session_start();
         $file = $dir . basename($_FILES["uploadfile"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-    
+
         #check if uploadfile is jepg/png
         $info = getimagesize($_FILES['uploadfile']['tmp_name']);
-    
+
         if ($info === FALSE) {
           $uploadOk = 0;
         }
@@ -41,7 +41,7 @@ session_start();
           $uploadOk = 0;
           echo "File type not support</br>";
         }
-    
+
         #checks if the upload is ok
         if ($uploadOk == 0) {
           echo "File failed to upload</br>";
@@ -63,7 +63,7 @@ session_start();
     }
     else {
       mysqli_stmt_bind_param($stmt, "ssss", $u_name, $u_nickname, $u_pwd, $filename);
-      mysqli_stmt_execute($stmt);    
+      mysqli_stmt_execute($stmt);
       $_SESSION['uName'] = $u_name;
       $_SESSION['uAvatar'] = $filename;
       header("Location: ../home.php?signup=success");
@@ -72,8 +72,8 @@ session_start();
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
   }
-  
+
   else{
-    header("Location: ../signup.php?errormsg=$errmessage " ); 
+    header("Location: ../signup.php?errormsg=$errmessage " );
   }
 }

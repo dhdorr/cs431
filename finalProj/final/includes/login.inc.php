@@ -19,6 +19,7 @@
       if ($row = mysqli_fetch_assoc($result)) {
         session_start();
         $_SESSION['uName'] = $row['u_name'];
+        $_SESSION['uNickname'] = $row['u_nickname'];
         $_SESSION['uId'] = $row['u_id'];
         $_SESSION['uAvatar'] = $row['u_avatar'];
         header("Location: ../home.php?login=success");
