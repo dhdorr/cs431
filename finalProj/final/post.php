@@ -117,7 +117,7 @@
 
       <div class="row justify-content-center">
         <?php
-          echo "<a type='button' class='btn btn-secondary btn-sm btn-block w-75' href='forum.php?fname=".$fname."&fid=".$fid."' id='a'> GO BACK </a>"
+          echo "<a type='button' class='btn btn-secondary btn-sm btn-block w-75' href='forum.php?fname=".$fname."&fid=".$fid."' id='a'> GO BACK </a>";
         ?>
       </div>
     </div>

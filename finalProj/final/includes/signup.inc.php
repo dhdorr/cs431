@@ -55,6 +55,7 @@ session_start();
         }
 
     if ($errcheck == 0) {
+
     $query = "INSERT INTO users (u_name, u_nickname, u_pwd, u_avatar ) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $query)) {
@@ -64,9 +65,8 @@ session_start();
     else {
       mysqli_stmt_bind_param($stmt, "ssss", $u_name, $u_nickname, $u_pwd, $filename);
       mysqli_stmt_execute($stmt);
-      $_SESSION['uName'] = $u_name;
-      $_SESSION['uAvatar'] = $filename;
-      header("Location: ../home.php?signup=success");
+
+      header("Location: ../login.php?signup=success");
       exit();
     }
     mysqli_stmt_close($stmt);

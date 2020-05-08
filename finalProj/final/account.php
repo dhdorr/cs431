@@ -34,9 +34,9 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-1">
+        <div class="col-2">
           <?php
-            echo "<p>Username: ".$_SESSION['uName']."</br>"."Nickname: ".$_SESSION['uNickname']."</br></p>";
+            echo "<h6 class='text-center'>Username: </h6><p class='text-center'>".$_SESSION['uName']."</p><h6 class='text-center'>Nickname: </h6><p class='text-center'>".$_SESSION['uNickname']."</p>";
           ?>
         </div>
       </div>

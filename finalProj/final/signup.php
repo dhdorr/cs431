@@ -28,7 +28,7 @@
         <input type="acount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">
 
         <label for="unickname" class="row justify-content-left px-md-3">Nickname</label>
-        <input type="acount" name="nickname" class="form-control" placeholder="nick name" required="">
+        <input type="acount" name="nickname" class="form-control" placeholder="nickname" required="">
 
         <label for="password" class="row justify-content-left px-md-3">Password</label>
         <input type="password" name="pwd" class="form-control" placeholder="Password" required="">
