@@ -18,7 +18,9 @@
   <form class="form-signin" action="includes/signup.inc.php" method="post" enctype="multipart/form-data">
 
     <h1 class="h3 mb-3 font-weight-normal">Creat an account</h1>
-    <h1 class="h6 mb-3 font-weight-normal"> <?= $_GET['errormsg'] ?></h1>
+    <?php if(isset($_GET['errormsg'])) {
+      echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
+    } ?>
 
 
     <input type="acount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">

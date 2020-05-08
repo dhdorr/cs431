@@ -21,10 +21,17 @@
     </a>
     <div>
       <?php
-      if (isset($_SESSION['uName'])) {
-        echo $_SESSION['uName'];
+        if (isset($_SESSION['uName'])) {
+          echo $_SESSION['uName'];
       ?>
-        <img src="images/<?php echo $_SESSION['uAvatar']; ?>" alt="logo" width=50 height=50>
+      <img src="images/<?php if (!isset($_SESSION['uAvatar'])) {
+                                echo "myBishop.png";
+                              }
+                              else {
+                                echo $_SESSION['uAvatar'];
+                              }
+                        ?>" alt="logo" width=50 height=50>
+
 
       <?php
         echo "\t";

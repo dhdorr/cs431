@@ -19,7 +19,9 @@
   <form class="form-signin" action="includes/login.inc.php" method="post">
 
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <h1 class="h6 mb-3 font-weight-normal"><?= $_GET['errormsg']?></h1>
+    <?php if(isset($_GET['errormsg'])) {
+      echo "<h1 class='h6 mb-3 font-weight-normal'>".$_GET['errormsg']."</h1>";
+    } ?>
 
 
     <input type="acount" id="useraccount" name="username" class="form-control" placeholder="Account name" required="" autofocus="">
