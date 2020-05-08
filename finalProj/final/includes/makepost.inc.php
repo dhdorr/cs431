@@ -18,7 +18,6 @@
     else {
       mysqli_stmt_bind_param($stmt, "sssii", $p_title, $p_subject, $p_body, $fid, $uid);
       mysqli_stmt_execute($stmt);
-      //echo $fid.$uid.$p_title;
       header("Location: ../home.php?post=success");
       exit();
     }
