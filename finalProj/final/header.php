@@ -24,7 +24,7 @@
         if (isset($_SESSION['uName'])) {
           echo $_SESSION['uName'];
       ?>
-      <img src="images/<?php if (!isset($_SESSION['uAvatar'])) {
+      <img src="images/<?php if (!isset($_SESSION['uAvatar']) || strlen($_SESSION['uAvatar']) < 3) {
                                 echo "myBishop.png";
                               }
                               else {
