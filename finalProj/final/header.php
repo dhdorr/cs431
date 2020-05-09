@@ -22,6 +22,7 @@
     <div>
       <?php
         if (isset($_SESSION['uName'])) {
+          
           echo "<a href='account.php' class='text-dark'>".$_SESSION['uName']."</a>";
       ?>
       <img src="images/<?php if (!isset($_SESSION['uAvatar']) || strlen($_SESSION['uAvatar']) < 3) {
@@ -34,6 +35,8 @@
 
 
       <?php
+        echo "\t";
+        echo '<a class="btn btn-primary text-light btn-sm" href="sublist.php">Favorite</a>';
         echo "\t";
         echo '<a class="btn btn-outline-primary text-primary btn-sm" href="includes/logout.inc.php">LOG OUT</a>';
       } else {
