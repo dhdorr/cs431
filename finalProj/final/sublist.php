@@ -30,7 +30,7 @@
             if (isset($_SESSION['uNickname'])) {
                 $name = $_SESSION['uNickname'];
                 $isLoggedIn = true;
-                echo "<div class='row justify-content-center mt-3 mb-5'><h2>$name's favorite forum</h2></div>";
+                echo "<div class='row justify-content-center mt-3 mb-5'><h2>$name's Favorite Forums</h2></div>";
             } else {
                 //display default layout
                 echo "<div class='row justify-content-center'>
@@ -62,13 +62,13 @@
 
                             //display forums from database
 
-                            echo "       
-                   
+                            echo "
+
                   <div class='card text-white bg-dark mb-3 w-75' >
-                                
-                                <a class='card-body'  href='forum.php?fname=" . $row['f_name'] . "&fid=" . $row['f_id'] . "'>
-                                  <h5 class='card-title' >" . $row['f_name'] . "</h5> 
-                                   
+
+                                <a class='card-body text-light'  href='forum.php?fname=" . $row['f_name'] . "&fid=" . $row['f_id'] . "'>
+                                  <h5 class='card-title' >" . $row['f_name'] . "</h5>
+
                                   <p class='card-text'>" . $row['f_description'] . "</p>
                                   </a>
                                 </div>

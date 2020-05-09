@@ -62,14 +62,14 @@
             $query2 = "SELECT * FROM favorites where u_id=$uid and f_id=$fid";
             $result2 = $conn->query($query2);
             if ($result2->num_rows > 0) {
-              echo "       
-                   
+              echo "
+
                   <div class='card text-white bg-dark mb-3 w-75' >
                                 <div class='card-header'> Add to favorite <button id='favorite-button" . $fid . "' class='favorite-button' value='$fid' onclick='addFavorite($fid)'>$favicon2</button> </div>
-                                <a class='card-body'  href='forum.php?fname=" . $row['f_name'] . "&fid=" . $row['f_id'] . "'>
-                                  <h5 class='card-title' >" . $row['f_name'] . "</h5> 
-                                   
-                                  <p class='card-text'>" . $row['f_description'] . "</p>
+                                <a class='card-body text-light'  href='forum.php?fname=" . $row['f_name'] . "&fid=" . $row['f_id'] . "'>
+                                  <h5 class='card-title text-light' >" . $row['f_name'] . "</h5>
+
+                                  <p class='card-text text-light'>" . $row['f_description'] . "</p>
                                   </a>
                                 </div>
                               ";
@@ -77,14 +77,14 @@
 
 
 
-              echo "       
-                   
+              echo "
+
               <div class='card text-white bg-dark mb-3 w-75' >
                             <div class='card-header'> Add to favorite <button id='favorite-button" . $fid . "' class='favorite-button' value='$fid' onclick='addFavorite($fid)'>$favicon</button> </div>
-                            <a class='card-body'  href='forum.php?fname=" . $row['f_name'] . "&fid=" . $row['f_id'] . "'>
-                              <h5 class='card-title' >" . $row['f_name'] . "</h5> 
-                               
-                              <p class='card-text'>" . $row['f_description'] . "</p>
+                            <a class='card-body text-light'  href='forum.php?fname=" . $row['f_name'] . "&fid=" . $row['f_id'] . "'>
+                              <h5 class='card-title text-light' >" . $row['f_name'] . "</h5>
+
+                              <p class='card-text text-light'>" . $row['f_description'] . "</p>
                               </a>
                             </div>
                           ";
